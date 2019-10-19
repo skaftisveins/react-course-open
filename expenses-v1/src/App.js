@@ -6,7 +6,6 @@ import Card from './components/Card';
 import uuid from 'uuidv4';
 
 const Wrapper = styled.div`
-  text-align: center;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -23,6 +22,9 @@ const Form = styled.form`
   align-items: center;
   justify-content: center;
   width: 50%;
+  position: relative;
+  padding: 1rem;
+  margin: 2rem;
 `;
 
 const Bullet = styled.div`
@@ -42,7 +44,10 @@ const List = styled.div`
 
 const Label = styled.label`
   color: #09d3ff;
-  text-align: left;
+  font-size: 2.4rem;
+  padding: 4% 10%;
+  font-size: ${props => (props.heading ? '2.4rem' : '1.8rem')};
+  align-self: flex-start;
 `;
 
 const App = () => {
@@ -58,7 +63,7 @@ const App = () => {
     if (event.target.name === 'Name') {
       setState({ ...state, name: event.target.value });
     }
-    if (event.target.name === 'Value') {
+    if (event.target.name === 'Cost') {
       setState({ ...state, cost: event.target.value });
     }
   };
@@ -98,19 +103,23 @@ const App = () => {
       <Title>What App</Title>
       <Wrapper>
         <Form onSubmit={handleSubmit}>
-          <Label>Add Expense</Label>
+          <Label heading>Add Expense</Label>
           <Input name="Name" value={state.name} handleChange={handleChange} />
-          <Label>Stats</Label>
-          <Input name="Value" value={state.cost} handleChange={handleChange} />
+          <Input name="Cost" value={state.cost} handleChange={handleChange} />
           <input type="submit" value="Add" />
+          <Label heading>Stats</Label>
           <Bullet>
             <div>
-              <label htmlFor="sum">Sum: </label>
-              <output name="sum">{state.sum}</output>
+              <Label htmlFor="sum">
+                Sum:
+                <output name="sum">{state.sum}</output>
+              </Label>
             </div>
             <div>
-              <label htmlFor="count">Count: </label>
-              <output name="count">{state.list.length}</output>
+              <Label htmlFor="count">
+                Count:
+                <output name="count">{state.list.length}</output>
+              </Label>
             </div>
           </Bullet>
         </Form>
