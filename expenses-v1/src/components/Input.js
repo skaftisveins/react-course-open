@@ -25,23 +25,6 @@ const Input = ({ name, value, handleChange }) => (
   </Container>
 );
 
-// class tInput extends React.Component {
-//   render() {
-//     return (
-//       <Container>
-//         <Label htmlFor={this.props.name}>{this.props.name}</Label>
-//         <input
-//           name={this.props.name}
-//           className="Input"
-//           type="text"
-//           value={this.props.value}
-//           onChange={e => this.props.handleChange(e)}
-//         />
-//       </Container>
-//     );
-//   }
-// }
-
 Input.propTypes = {
   name: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

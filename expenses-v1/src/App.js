@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Input from './components/Input';
+import Title from './components/Title';
 import styled from 'styled-components';
 import Card from './components/Card';
+import uuid from 'uuidv4';
 
 const Wrapper = styled.div`
   text-align: center;
@@ -23,12 +25,6 @@ const Form = styled.form`
   width: 50%;
 `;
 
-const List = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-`;
-
 const Bullet = styled.div`
   color: #09d3ff;
   display: flex;
@@ -37,22 +33,28 @@ const Bullet = styled.div`
   height: 50vh;
 `;
 
+const List = styled.div`
+  color: #09d3ff;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+`;
+
+const Label = styled.label`
+  color: #09d3ff;
+  text-align: left;
+`;
+
 const App = () => {
   const [state, setState] = useState({
     name: '',
     cost: '',
+    counter: 0,
     sum: 0,
     list: []
   });
 
-  // const { name, cost, sum, list } = state;
-
-  useEffect(() => {});
-
-  // const [nameState, setNameState] = useState('');
-  // if (state.list.length === 1) setState({ ...state, sum: state.sum });
-
-  const handleChange = event => {
+  const handleChange = (event, list) => {
     if (event.target.name === 'Name') {
       setState({ ...state, name: event.target.value });
     }
@@ -61,41 +63,66 @@ const App = () => {
     }
   };
 
+  const handleDelete = item => {
+    const newList = state.list.filter(x => x.id !== item.id);
+    console.log(item);
+    setState({
+      ...state,
+      list: newList,
+      // counter: state.counter - 1,
+      sum: state.sum - item.cost
+    });
+  };
+
   const handleSubmit = event => {
     if (state.name.length && state.cost.length) {
       setState({
         name: '',
         cost: '',
+        // counter: state.counter + 1,
         sum: state.sum + Number(state.cost),
-        list: [...state.list, state.name]
+        list: [
+          ...state.list,
+          { name: state.name, cost: state.cost, id: uuid() }
+        ]
       });
     }
     // Prevents actual submit - would refresh page
     event.preventDefault();
   };
 
-  return (
-    <Wrapper>
-      <Form onSubmit={handleSubmit}>
-        <Input name="Name" value={state.name} handleChange={handleChange} />
-        <Input name="Value" value={state.cost} handleChange={handleChange} />
-        <input type="submit" value="Click me!" />
-      </Form>
+  console.log(uuid());
 
-      <List>
-        <Bullet>
-          <label htmlFor="list">List:</label>
-          <output name="list">{'[ ' + state.list.join(', ') + ' ]'}</output>
-        </Bullet>
-        <Bullet>
-          <label htmlFor="sum">Sum:</label>
-          <output name="sum">{state.sum}</output>
-        </Bullet>
-      </List>
-      <Card list={state.list} />
-    </Wrapper>
+  return (
+    <>
+      <Title>What App</Title>
+      <Wrapper>
+        <Form onSubmit={handleSubmit}>
+          <Label>Add Expense</Label>
+          <Input name="Name" value={state.name} handleChange={handleChange} />
+          <Label>Stats</Label>
+          <Input name="Value" value={state.cost} handleChange={handleChange} />
+          <input type="submit" value="Add" />
+          <Bullet>
+            <div>
+              <label htmlFor="sum">Sum: </label>
+              <output name="sum">{state.sum}</output>
+            </div>
+            <div>
+              <label htmlFor="count">Count: </label>
+              <output name="count">{state.list.length}</output>
+            </div>
+          </Bullet>
+        </Form>
+        <List>
+          <Card list={state.list} onDelete={handleDelete} />
+        </List>
+      </Wrapper>
+    </>
   );
 };
+
+export default App;
 
 // class App extends React.Component {
 //   constructor(props) {
@@ -165,5 +192,3 @@ const App = () => {
 //     );
 //   }
 // }
-
-export default App;

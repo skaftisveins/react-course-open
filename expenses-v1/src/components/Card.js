@@ -5,12 +5,24 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 180px;
-  height: 40px;
-  background-color: #000000;
+  width: 260px;
+  height: 100px;
+  border-style: solid;
+  border-color: #09d3ff;
   border-radius: 4px;
   padding: 1rem;
   margin: 1rem;
+  position: relative;
+`;
+
+const Label = styled.label`
+  display: flex;
+`;
+
+const ButtonWrapper = styled.div`
+  position: absolute;
+  align-self: flex-end;
+  display: flex;
 
   &:hover {
     opacity: 0.5;
@@ -19,13 +31,23 @@ const Wrapper = styled.div`
 `;
 
 const Card = props => {
-  const { list } = props;
+  const { list, onDelete } = props;
 
-  console.log(list);
   return (
     <>
       {list.map(item => (
-        <Wrapper>{item}</Wrapper>
+        <Wrapper key={item.id}>
+          <Label>Name: {item.name}</Label>
+          <Label>Cost: {item.cost}</Label>
+
+          <ButtonWrapper>
+            <button name="delete" type="button" onClick={() => onDelete(item)}>
+              <span role="img" aria-label="delete">
+                ✖
+              </span>
+            </button>
+          </ButtonWrapper>
+        </Wrapper>
       ))}
     </>
   );
