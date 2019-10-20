@@ -58,6 +58,24 @@ const Span = styled.span`
   color: #555555;
 `;
 
+const Button = styled.button`
+  background: ${props => (props.primary ? '#1787DC' : 'white')};
+  color: ${props => (props.primary ? 'white' : 'palevioletred')};
+
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 0.5em;
+  border: 1px solid black;
+  border-radius: 3px;
+
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+    background: white;
+    color: #155484;
+  }
+`;
+
 const App = () => {
   const [state, setState] = useState({
     name: '',
@@ -114,7 +132,10 @@ const App = () => {
           <Label heading>Add Expense</Label>
           <Input name='Name' value={state.name} handleChange={handleChange} />
           <Input name='Cost' value={state.cost} handleChange={handleChange} />
-          <input type='submit' value='Add' />
+          <Button primary type='submit'>
+            Add
+          </Button>
+
           <Label heading>Stats</Label>
           <Bullet>
             <Label htmlFor='sum'>Sum: {state.sum}</Label>
