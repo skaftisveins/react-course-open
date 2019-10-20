@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Input from './components/Input';
 import Title from './components/Title';
 import styled from 'styled-components';
@@ -7,7 +7,6 @@ import uuid from 'uuidv4';
 
 const Wrapper = styled.div`
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,8 +30,12 @@ const Bullet = styled.div`
   color: #09d3ff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  height: 50vh;
+  justify-content: space-between;
+  width: 260px;
+  height: 100px;
+  padding: 1rem;
+  margin: 1rem;
+  position: relative;
 `;
 
 const List = styled.div`
@@ -48,6 +51,11 @@ const Label = styled.label`
   padding: 4% 10%;
   font-size: ${props => (props.heading ? '2.4rem' : '1.8rem')};
   align-self: flex-start;
+`;
+
+const Span = styled.span`
+  font-size: medium;
+  color: #555555;
 `;
 
 const App = () => {
@@ -96,31 +104,21 @@ const App = () => {
     event.preventDefault();
   };
 
-  console.log(uuid());
-
   return (
     <>
-      <Title>What App</Title>
+      <Title>
+        React Expense <Span>(version 2.0.0)</Span>
+      </Title>
       <Wrapper>
         <Form onSubmit={handleSubmit}>
           <Label heading>Add Expense</Label>
-          <Input name="Name" value={state.name} handleChange={handleChange} />
-          <Input name="Cost" value={state.cost} handleChange={handleChange} />
-          <input type="submit" value="Add" />
+          <Input name='Name' value={state.name} handleChange={handleChange} />
+          <Input name='Cost' value={state.cost} handleChange={handleChange} />
+          <input type='submit' value='Add' />
           <Label heading>Stats</Label>
           <Bullet>
-            <div>
-              <Label htmlFor="sum">
-                Sum:
-                <output name="sum">{state.sum}</output>
-              </Label>
-            </div>
-            <div>
-              <Label htmlFor="count">
-                Count:
-                <output name="count">{state.list.length}</output>
-              </Label>
-            </div>
+            <Label htmlFor='sum'>Sum: {state.sum}</Label>
+            <Label htmlFor='count'>Count: {state.list.length}</Label>
           </Bullet>
         </Form>
         <List>

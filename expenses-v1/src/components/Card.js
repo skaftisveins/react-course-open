@@ -41,8 +41,8 @@ const Card = props => {
           <Label>Cost: {item.cost}</Label>
 
           <ButtonWrapper>
-            <button name="delete" type="button" onClick={() => onDelete(item)}>
-              <span role="img" aria-label="delete">
+            <button name='delete' type='button' onClick={() => onDelete(item)}>
+              <span role='img' aria-label='delete'>
                 ✖
               </span>
             </button>
