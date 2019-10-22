@@ -9,7 +9,7 @@ const Wrapper = styled.div`
   background-color: #282c34;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: top;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
@@ -130,16 +130,16 @@ const App = () => {
       <Wrapper>
         <Form onSubmit={handleSubmit}>
           <Label heading>Add Expense</Label>
-          <Input name='Name' value={state.name} handleChange={handleChange} />
-          <Input name='Cost' value={state.cost} handleChange={handleChange} />
-          <Button primary type='submit'>
+          <Input name="Name" value={state.name} handleChange={handleChange} />
+          <Input name="Cost" value={state.cost} handleChange={handleChange} />
+          <Button primary type="submit">
             Add
           </Button>
 
           <Label heading>Stats</Label>
           <Bullet>
-            <Label htmlFor='sum'>Sum: {state.sum}</Label>
-            <Label htmlFor='count'>Count: {state.list.length}</Label>
+            <Label htmlFor="sum">Sum: {state.sum}</Label>
+            <Label htmlFor="count">Count: {state.list.length}</Label>
           </Bullet>
         </Form>
         <List>
