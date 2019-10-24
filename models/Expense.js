@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const ExpenseSchema = mongoose.Schema({
-  expense: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Expenses'
   },
@@ -19,4 +19,4 @@ const ExpenseSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('expense', ExpenseSchema);
+module.exports = mongoose.model('expenses', ExpenseSchema);

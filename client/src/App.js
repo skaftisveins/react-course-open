@@ -4,6 +4,8 @@ import Title from './components/Title';
 import styled from 'styled-components';
 import Card from './components/Card';
 import uuid from 'uuidv4';
+import { themeContext, themes } from './context/theme/themeContext';
+import ExpenseState from './context/expense/ExpenseState';
 
 const Wrapper = styled.div`
   background-color: #282c34;
@@ -85,6 +87,8 @@ const App = () => {
     list: []
   });
 
+  const [themeState, setThemeState] = useState({ theme: themes.dark });
+
   const handleChange = (event, list) => {
     if (event.target.name === 'Name') {
       setState({ ...state, name: event.target.value });
@@ -123,30 +127,32 @@ const App = () => {
   };
 
   return (
-    <>
+    <ExpenseState>
       <Title>
         React Expense <Span>(version 2.0.0)</Span>
       </Title>
-      <Wrapper>
-        <Form onSubmit={handleSubmit}>
-          <Label heading>Add Expense</Label>
-          <Input name="Name" value={state.name} handleChange={handleChange} />
-          <Input name="Cost" value={state.cost} handleChange={handleChange} />
-          <Button primary type="submit">
-            Add
-          </Button>
+      <themeContext.Provider value={themeState}>
+        <Wrapper>
+          <Form onSubmit={handleSubmit}>
+            <Label heading>Add Expense</Label>
+            <Input name="Name" value={state.name} handleChange={handleChange} />
+            <Input name="Cost" value={state.cost} handleChange={handleChange} />
+            <Button primary type="submit">
+              Add
+            </Button>
 
-          <Label heading>Stats</Label>
-          <Bullet>
-            <Label htmlFor="sum">Sum: {state.sum}</Label>
-            <Label htmlFor="count">Count: {state.list.length}</Label>
-          </Bullet>
-        </Form>
-        <List>
-          <Card list={state.list} onDelete={handleDelete} />
-        </List>
-      </Wrapper>
-    </>
+            <Label heading>Stats</Label>
+            <Bullet>
+              <Label htmlFor="sum">Sum: {state.sum}</Label>
+              <Label htmlFor="count">Count: {state.list.length}</Label>
+            </Bullet>
+          </Form>
+          <List>
+            <Card list={state.list} onDelete={handleDelete} />
+          </List>
+        </Wrapper>
+      </themeContext.Provider>
+    </ExpenseState>
   );
 };
 

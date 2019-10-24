@@ -1,11 +1,21 @@
 const express = require('express');
+const connectDB = require('./config/db');
 const app = express();
 
-app.get('/', (req, res) => res.json({ msg: 'Expenses Version: 3.0.0' }));
+// Connect Database
+connectDB();
 
+// app.get('/', (req, res) => res.json({ msg: 'React Expenses Version: 3.0.0' }));
+// app.get('/', (req, res));
+
+app.get('/', (req, res));
 // Define Routes
-app.use('/api/expenses', require('./routes/expenses'));
-// app.use('/api/contacts', require('./routes/contacts'));
+// app.use('/api/expenses', (req, res) =>
+//   //   res.json({ msg: 'React Expenses Version: 3.0.0' })
+//   console.log(res)y
+//   res.json()
+// );
+app.use('/api/contacts', require('./routes/contacts'));
 
 const PORT = process.env.PORT || 5000;
 

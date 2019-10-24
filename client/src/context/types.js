@@ -1,0 +1,11 @@
+export const GET_EXPENSES = 'GET_EXPENSES';
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const UPDATE_EXPENSE = 'UPDATE_EXPENSE';
+export const DELETE_EXPENSE = 'DELETE_EXPENSE';
+export const SET_CURRENT = 'SET_CURRENT';
+export const CLEAR_CURRENT = 'CLEAR_CURRENT';
+export const FILTER_EXPENSE = 'FILTER_EXPENSE';
+export const CLEAR_EXPENSE = 'CLEAR_EXPENSE';
+export const CLEAR_FILTER = 'CLEAR_FILTER';
+export const EXPENSE_ERROR = 'EXPENSE_ERROR';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';

@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { Fragment, useContext, useEffect } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import ExpenseContext from '../context/expense/expenseContext';
+
+import { themeContext } from '../context/theme/themeContext';
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,6 +17,7 @@ const Wrapper = styled.div`
   padding: 1rem;
   margin: 1rem;
   position: relative;
+  background-color: ${props => props.theme.background};
 `;
 
 const Label = styled.label`
@@ -31,26 +36,53 @@ const ButtonWrapper = styled.div`
 `;
 
 const Card = props => {
+  const expenseContext = useContext(ExpenseContext);
+  const { expenses, filter, getExpenses } = expenseContext;
+  console.log(expenses);
   const { list, onDelete } = props;
+
+  useEffect(() => {
+    getExpenses();
+  }, []);
+
+  if (expenses !== null && expenses.length === 0) {
+    return <h4>Please add an expense</h4>;
+  }
 
   return (
     <>
       {list.map(item => (
-        <Wrapper key={item.id}>
-          <Label>Name: {item.name}</Label>
-          <Label>Cost: {item.cost}</Label>
+        <themeContext.Consumer>
+          {themeState => (
+            <Wrapper key={item.id}>
+              <Label>Name: {item.name}</Label>
+              <Label>Cost: {item.cost}</Label>
 
-          <ButtonWrapper>
-            <button name='delete' type='button' onClick={() => onDelete(item)}>
-              <span role='img' aria-label='delete'>
-                ✖
-              </span>
-            </button>
-          </ButtonWrapper>
-        </Wrapper>
+              <ButtonWrapper>
+                <button
+                  name="delete"
+                  type="button"
+                  onClick={() => onDelete(item)}
+                >
+                  <span role="img" aria-label="delete">
+                    ✖
+                  </span>
+                </button>
+              </ButtonWrapper>
+            </Wrapper>
+          )}
+        </themeContext.Consumer>
       ))}
     </>
   );
 };
+
+// Card.prototypes = {
+//   list: PropTypes.arryOf(PropTypes.string)
+// };
+
+// Card.defaultProps = {
+//   list: []
+// };
 
 export default Card;
