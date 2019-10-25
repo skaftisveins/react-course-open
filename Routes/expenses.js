@@ -1,23 +1,42 @@
 const express = require('express');
 const router = express.Router();
 
-const Expenses = require('../models/Expenses');
+const Expense = require('../models/Expense');
 
 // @route   GET api/expenses
 // @desc    Get all expenses
 // @access  Public
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+  // console.log(req.expenses.date);
   try {
-    // const expenses = await Expenses
-  } catch (err) {}
-  res.send('Get all expenses');
+    const expenses = await Expense.find({ Expenses: req.expenses.name }).sort({
+      date: -1
+    });
+    res.json(expenses);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 // @route   POST api/expenses
 // @desc    Add new expenses
 // @access  Public
-router.post('/', (req, res) => {
-  res.send('Add Expense');
+router.post('/', async (req, res) => {
+  const { name, cost, date } = req.body;
+  try {
+    const newExpense = new Expense({
+      name,
+      cost,
+      date
+    });
+
+    const expense = await newExpense.save();
+    res.json(expense);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
 });
 
 // @route   PUT api/expenses
