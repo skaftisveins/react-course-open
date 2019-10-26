@@ -1,7 +1,7 @@
 {
   "name": "react-course-open",
   "version": "1.0.0",
-  "description": "Expenses app",
+  "description": "Transactions app",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

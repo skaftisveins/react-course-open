@@ -1,29 +1,29 @@
 import {
-  GET_EXPENSES,
-  ADD_EXPENSE,
-  UPDATE_EXPENSE,
-  DELETE_EXPENSE,
+  GET_TRANSACTIONS,
+  ADD_TRANSACTION,
+  UPDATE_TRANSACTION,
+  DELETE_TRANSACTION,
   SET_CURRENT,
   CLEAR_CURRENT,
-  FILTER_EXPENSE,
+  FILTER_TRANSACTION,
   CLEAR_FILTER,
-  EXPENSE_ERROR,
-  CLEAR_EXPENSE
+  TRANSACTION_ERROR,
+  CLEAR_TRANSACTION
 } from '../types';
 
 export default (state, action) => {
   switch (action.type) {
-    case GET_EXPENSES:
+    case GET_TRANSACTIONS:
       return {
         ...state,
-        expenses: action.payload
+        transactions: action.payload
       };
-    case ADD_EXPENSE:
+    case ADD_TRANSACTION:
       return {
         ...state,
-        expenses: [action.payload, ...state.expenses]
+        transactions: [action.payload, ...state.transactions]
       };
-    case EXPENSE_ERROR:
+    case TRANSACTION_ERROR:
       return {
         ...state,
         error: action.payload

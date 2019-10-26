@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Card from './components/Card';
 import uuid from 'uuidv4';
 import { themeContext, themes } from './context/theme/themeContext';
-import ExpenseState from './context/expense/ExpenseState';
+import TransactionState from './context/transaction/TransactionState';
 
 const Wrapper = styled.div`
   background-color: #282c34;
@@ -127,24 +127,24 @@ const App = () => {
   };
 
   return (
-    <ExpenseState>
+    <TransactionState>
       <Title>
-        React Expense <Span>(version 2.0.0)</Span>
+        React Transaction <Span>(version 2.0.0)</Span>
       </Title>
       <themeContext.Provider value={themeState}>
         <Wrapper>
           <Form onSubmit={handleSubmit}>
-            <Label heading>Add Expense</Label>
-            <Input name="Name" value={state.name} handleChange={handleChange} />
-            <Input name="Cost" value={state.cost} handleChange={handleChange} />
-            <Button primary type="submit">
+            <Label heading>Add Transaction</Label>
+            <Input name='Name' value={state.name} handleChange={handleChange} />
+            <Input name='Cost' value={state.cost} handleChange={handleChange} />
+            <Button primary type='submit'>
               Add
             </Button>
 
             <Label heading>Stats</Label>
             <Bullet>
-              <Label htmlFor="sum">Sum: {state.sum}</Label>
-              <Label htmlFor="count">Count: {state.list.length}</Label>
+              <Label htmlFor='sum'>Sum: {state.sum}</Label>
+              <Label htmlFor='count'>Count: {state.list.length}</Label>
             </Bullet>
           </Form>
           <List>
@@ -152,7 +152,7 @@ const App = () => {
           </List>
         </Wrapper>
       </themeContext.Provider>
-    </ExpenseState>
+    </TransactionState>
   );
 };
 

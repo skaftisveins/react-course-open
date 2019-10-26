@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import ExpenseContext from '../context/expense/expenseContext';
+import TransactionContext from '../context/transaction/transactionContext';
 
 import { themeContext } from '../context/theme/themeContext';
 
@@ -36,18 +36,18 @@ const ButtonWrapper = styled.div`
 `;
 
 const Card = props => {
-  const expenseContext = useContext(ExpenseContext);
-  const { expenses, filter, getExpenses } = expenseContext;
-  console.log(expenses);
+  const transactionContext = useContext(TransactionContext);
+  const { transactions, filter, getTransactions } = transactionContext;
+  console.log(transactions);
   const { list, onDelete } = props;
 
   useEffect(() => {
-    getExpenses();
+    getTransactions();
   }, []);
 
-  if (expenses !== null && expenses.length === 0) {
-    return <h4>Please add an expense</h4>;
-  }
+  // if (transactions !== null && transactions.length === 0) {
+  //   return <h4>Please add an transaction</h4>;
+  // }
 
   return (
     <>
@@ -60,11 +60,11 @@ const Card = props => {
 
               <ButtonWrapper>
                 <button
-                  name="delete"
-                  type="button"
+                  name='delete'
+                  type='button'
                   onClick={() => onDelete(item)}
                 >
-                  <span role="img" aria-label="delete">
+                  <span role='img' aria-label='delete'>
                     ✖
                   </span>
                 </button>

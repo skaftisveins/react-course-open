@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
-const ExpenseSchema = mongoose.Schema({
-  user: {
+const TransactionSchema = mongoose.Schema({
+  transaction: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Expenses'
+    ref: 'Transactions'
   },
   name: {
     type: String,
@@ -19,4 +19,4 @@ const ExpenseSchema = mongoose.Schema({
   }
 });
 
-module.exports = mongoose.model('expenses', ExpenseSchema);
+module.exports = mongoose.model('transaction', TransactionSchema);
