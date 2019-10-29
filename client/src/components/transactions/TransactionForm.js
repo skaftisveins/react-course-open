@@ -4,18 +4,16 @@ import TransactionContext from '../../context/transaction/transactionContext';
 const TransactionForm = () => {
   const transactionContext = useContext(TransactionContext);
 
-  const { addTransaction, clearCurrent, current } = transactionContext;
+  const {
+    addTransaction,
+    updateTransaction,
+    clearCurrent,
+    current
+  } = transactionContext;
 
   useEffect(() => {
     if (current !== null) {
       setTransaction(current);
-    } else {
-      setTransaction({
-        title: '',
-        description: '',
-        cost: '',
-        type: 'expense'
-      });
     }
   }, [transactionContext, current]);
 
@@ -37,7 +35,7 @@ const TransactionForm = () => {
     if (current === null) {
       addTransaction(transaction);
     } else {
-      //   updateTransaction(transaction);
+      updateTransaction(transaction);
     }
     setTransaction({
       title: '',
@@ -53,35 +51,53 @@ const TransactionForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className='text-primary'>
+      <h2 className="text-primary">
         {current ? 'Edit Transaction' : 'Add Transaction'}
       </h2>
       <input
-        type='text'
-        placeholder='Title'
-        name='title'
+        type="text"
+        placeholder="Title"
+        name="title"
         value={title}
         onChange={handleChange}
       />
       <input
-        type='text'
-        placeholder='description'
-        name='description'
+        type="text"
+        placeholder="description"
+        name="description"
         value={description}
         onChange={handleChange}
       />
       <input
-        type='text'
-        placeholder='cost'
-        name='cost'
+        type="text"
+        placeholder="cost"
+        name="cost"
         value={cost}
         onChange={handleChange}
       />
       <h5>Transaction Type</h5>
-      <input type="radio" name="type" value="expense" checked={type === 'expense'} onChange={handleChange} />Expense{" "}
-      <input type="radio" name="type" value="income" checked={type === 'income'} onChange={handleChange} />Income{" "}
+      <input
+        type="radio"
+        name="type"
+        value="expense"
+        checked={type === 'expense'}
+        onChange={handleChange}
+      />
+      Expense{' '}
+      <input
+        type="radio"
+        name="type"
+        value="income"
+        checked={type === 'income'}
+        onChange={handleChange}
+      />
+      Income{' '}
       <div>
-        <input type="submit" value={current ? "Update Transaction" : "Add Transaction"} className="btn btn-primary btn-block" />
+        <input
+          type="submit"
+          value={current ? 'Update Transaction' : 'Add Transaction'}
+          className="btn btn-primary btn-block"
+        />
       </div>
       {current && (
         <div>

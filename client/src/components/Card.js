@@ -41,9 +41,9 @@ const Card = props => {
   console.log(transactions);
   const { list, onDelete } = props;
 
-  useEffect(() => {
-    getTransactions();
-  }, []);
+  // useEffect(() => {
+  //   getTransactions();
+  // }, []);
 
   // if (transactions !== null && transactions.length === 0) {
   //   return <h4>Please add an transaction</h4>;
@@ -60,11 +60,11 @@ const Card = props => {
 
               <ButtonWrapper>
                 <button
-                  name='delete'
-                  type='button'
+                  name="delete"
+                  type="button"
                   onClick={() => onDelete(item)}
                 >
-                  <span role='img' aria-label='delete'>
+                  <span role="img" aria-label="delete">
                     ✖
                   </span>
                 </button>

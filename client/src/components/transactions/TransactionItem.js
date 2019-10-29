@@ -20,8 +20,8 @@ const TransactionItem = ({ transaction }) => {
   };
 
   return (
-    <div className='card bg-light'>
-      <h3 className='text-primary text-left'>
+    <div className="card bg-light">
+      <h3 className="text-primary text-left">
         {title}{' '}
         <span
           style={{ float: 'right' }}
@@ -32,14 +32,21 @@ const TransactionItem = ({ transaction }) => {
           {type.charAt(0).toUpperCase() + type.slice(1)}
         </span>
       </h3>
-      <ul className='list'>
+      <ul className="list">
         {description && <li>{description}</li>}
         {cost && <li>{cost}</li>}
         {/* <i className='fas fa-envelope-open' />  */}
       </ul>
       <p>
-        <button className='btn btn-dark btn-sm'>Edit</button>
-        <button className='btn btn-danger btn-sm'>Delete</button>
+        <button
+          className="btn btn-dark btn-sm"
+          onClick={() => setCurrent(transaction)}
+        >
+          Edit
+        </button>
+        <button className="btn btn-danger btn-sm" onClick={onDelete}>
+          Delete
+        </button>
       </p>
     </div>
   );

@@ -4,11 +4,11 @@ import {
   UPDATE_TRANSACTION,
   DELETE_TRANSACTION,
   FILTER_TRANSACTIONS,
-  CLEAR_TRANSACTIONS, // FIX LATER
   SET_CURRENT,
   CLEAR_CURRENT,
   CLEAR_FILTER,
-  TRANSACTION_ERROR
+  TRANSACTION_ERROR,
+  CLEAR_TRANSACTIONS // FIX LATER
 } from '../types';
 
 export default (state, action) => {
@@ -26,12 +26,14 @@ export default (state, action) => {
         loading: false
       };
     case UPDATE_TRANSACTION:
+      console.log('reducer');
       return {
         ...state,
         transactions: state.transactions.map(transaction =>
-          transaction.id === action.payload._id ? action.payload : transaction
+          transaction._id === action.payload._id ? action.payload : transaction
         ),
-        loading: false
+        loading: false,
+        current: null
       };
     case DELETE_TRANSACTION:
       return {
@@ -57,7 +59,7 @@ export default (state, action) => {
     case CLEAR_CURRENT:
       return {
         ...state,
-        current: action.payload
+        current: null
       };
     case FILTER_TRANSACTIONS:
       return {

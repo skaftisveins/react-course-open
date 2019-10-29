@@ -80,61 +80,68 @@ const Button = styled.button`
 `;
 
 const App = () => {
-  const [state, setState] = useState({
-    name: '',
-    cost: '',
-    counter: 0,
-    sum: 0,
-    list: []
-  });
-
-  const [themeState, setThemeState] = useState({ theme: themes.dark });
-
-  const handleChange = (event, list) => {
-    if (event.target.name === 'Name') {
-      setState({ ...state, name: event.target.value });
-    }
-    if (event.target.name === 'Cost') {
-      setState({ ...state, cost: event.target.value });
-    }
-  };
-
-  const handleDelete = item => {
-    const newList = state.list.filter(x => x.id !== item.id);
-    console.log(item);
-    setState({
-      ...state,
-      list: newList,
-      // counter: state.counter - 1,
-      sum: state.sum - item.cost
-    });
-  };
-
-  const handleSubmit = event => {
-    if (state.name.length && state.cost.length) {
-      setState({
-        name: '',
-        cost: '',
-        // counter: state.counter + 1,
-        sum: state.sum + Number(state.cost),
-        list: [
-          ...state.list,
-          { name: state.name, cost: state.cost, id: uuid() }
-        ]
-      });
-    }
-    // Prevents actual submit - would refresh page
-    event.preventDefault();
-  };
-
   return (
     <TransactionState>
       <Title>
         React Transaction App
-        <Span> (Version 2.8.6)</Span>
+        <Span> (Version 2.8.9)</Span>
       </Title>
+      <Home />
+    </TransactionState>
+  );
+};
 
-      {/* <themeContext.Provider value={themeState}>
+export default App;
+
+// const [state, setState] = useState({
+//   name: '',
+//   cost: '',
+//   counter: 0,
+//   sum: 0,
+//   list: []
+// });
+
+// const [themeState, setThemeState] = useState({ theme: themes.dark });
+
+// const handleChange = (event, list) => {
+//   if (event.target.name === 'Name') {
+//     setState({ ...state, name: event.target.value });
+//   }
+//   if (event.target.name === 'Cost') {
+//     setState({ ...state, cost: event.target.value });
+//   }
+// };
+
+// const handleDelete = item => {
+//   const newList = state.list.filter(x => x.id !== item.id);
+//   console.log(item);
+//   setState({
+//     ...state,
+//     list: newList,
+//     // counter: state.counter - 1,
+//     sum: state.sum - item.cost
+//   });
+// };
+
+// const handleSubmit = event => {
+//   if (state.name.length && state.cost.length) {
+//     setState({
+//       name: '',
+//       cost: '',
+//       // counter: state.counter + 1,
+//       sum: state.sum + Number(state.cost),
+//       list: [
+//         ...state.list,
+//         { name: state.name, cost: state.cost, id: uuid() }
+//       ]
+//     });
+//   }
+//   // Prevents actual submit - would refresh page
+//   event.preventDefault();
+// };
+
+{
+  /* <themeContext.Provider value={themeState}>
         <Wrapper>
           <Form onSubmit={handleSubmit}>
             <Label heading>Add Transaction</Label>
@@ -154,13 +161,8 @@ const App = () => {
             <Card list={state.list} onDelete={handleDelete} />
           </List>
         </Wrapper>
-      </themeContext.Provider> */}
-      <Home />
-    </TransactionState>
-  );
-};
-
-export default App;
+      </themeContext.Provider> */
+}
 
 // class App extends React.Component {
 //   constructor(props) {
