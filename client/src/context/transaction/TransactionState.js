@@ -9,10 +9,10 @@ import {
   DELETE_TRANSACTION,
   SET_CURRENT,
   CLEAR_CURRENT,
-  FILTER_TRANSACTION,
+  FILTER_TRANSACTIONS,
   CLEAR_FILTER,
   TRANSACTION_ERROR,
-  CLEAR_TRANSACTION
+  CLEAR_TRANSACTIONS
 } from '../types';
 
 const TransactionState = props => {
@@ -41,13 +41,68 @@ const TransactionState = props => {
       });
     }
   };
+
+  // Add Transaction
+  const addTransaction = async transaction => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.post('/api/transactions', transaction, config);
+      dispatch({
+        type: ADD_TRANSACTION,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: TRANSACTION_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+
+  // Clear Transactions
+  const clearTransactions = () => {
+    dispatch({ type: CLEAR_TRANSACTIONS });
+  };
+
+  // Set Current Transaction
+  const setCurrent = transaction => {
+    dispatch({ type: SET_CURRENT, payload: transaction });
+  };
+
+  // Clear Current Transaction
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT });
+  };
+
+  // Filter Transactions
+  const filterTransactions = text => {
+    dispatch({ type: FILTER_TRANSACTIONS, payload: text });
+  };
+
+  // Clear Filter
+  const clearFilter = () => {
+    dispatch({ type: CLEAR_FILTER });
+  };
+
   return (
     <TransactionContext.Provider
       value={{
         transactions: state.transactions,
         current: state.current,
         filter: state.filter,
-        getTransactions // TODO
+        error: state.error,
+        getTransactions,
+        addTransaction,
+        clearTransactions,
+        setCurrent,
+        clearCurrent,
+        filterTransactions,
+        clearFilter
       }}
     >
       {props.children}

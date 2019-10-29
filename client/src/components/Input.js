@@ -10,6 +10,7 @@ const Container = styled.div`
 
 const Label = styled.label`
   width: 5em;
+  color: black;
 `;
 
 const Input = ({ name, value, handleChange }) => (
@@ -17,8 +18,8 @@ const Input = ({ name, value, handleChange }) => (
     <Label htmlFor={name}>{name}</Label>
     <input
       name={name}
-      className="Input"
-      type="text"
+      className='Input'
+      type='text'
       value={value}
       onChange={e => handleChange(e)}
     />

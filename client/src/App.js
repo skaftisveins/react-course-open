@@ -3,12 +3,13 @@ import Input from './components/Input';
 import Title from './components/Title';
 import styled from 'styled-components';
 import Card from './components/Card';
+import Home from './components/pages/Home';
 import uuid from 'uuidv4';
 import { themeContext, themes } from './context/theme/themeContext';
 import TransactionState from './context/transaction/TransactionState';
+import './App.css';
 
 const Wrapper = styled.div`
-  background-color: #282c34;
   display: flex;
   flex-direction: row;
   align-items: top;
@@ -48,7 +49,7 @@ const List = styled.div`
 `;
 
 const Label = styled.label`
-  color: #09d3ff;
+  color: black;
   font-size: 2.4rem;
   padding: 4% 10%;
   font-size: ${props => (props.heading ? '2.4rem' : '1.8rem')};
@@ -129,9 +130,11 @@ const App = () => {
   return (
     <TransactionState>
       <Title>
-        React Transaction <Span>(version 2.0.0)</Span>
+        React Transaction App
+        <Span> (Version 2.8.4)</Span>
       </Title>
-      <themeContext.Provider value={themeState}>
+
+      {/* <themeContext.Provider value={themeState}>
         <Wrapper>
           <Form onSubmit={handleSubmit}>
             <Label heading>Add Transaction</Label>
@@ -151,7 +154,8 @@ const App = () => {
             <Card list={state.list} onDelete={handleDelete} />
           </List>
         </Wrapper>
-      </themeContext.Provider>
+      </themeContext.Provider> */}
+      <Home />
     </TransactionState>
   );
 };

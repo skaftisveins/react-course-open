@@ -16,12 +16,14 @@ export default (state, action) => {
     case GET_TRANSACTIONS:
       return {
         ...state,
-        transactions: action.payload
+        transactions: action.payload,
+        loading: false
       };
     case ADD_TRANSACTION:
       return {
         ...state,
-        transactions: [action.payload, ...state.transactions]
+        transactions: [action.payload, ...state.transactions],
+        loading: false
       };
     case TRANSACTION_ERROR:
       return {
