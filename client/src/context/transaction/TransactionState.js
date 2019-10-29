@@ -64,6 +64,48 @@ const TransactionState = props => {
     }
   };
 
+  // Delete Transaction
+  const deleteTransaction = async id => {
+    try {
+      await axios.delete(`/api/transactions/${id}`);
+      dispatch({
+        type: DELETE_TRANSACTION,
+        payload: id
+      });
+    } catch (err) {
+      dispatch({
+        type: TRANSACTION_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+
+  // Update Transaction
+  const updateTransaction = async transaction => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+
+    try {
+      const res = await axios.put(
+        `/api/transactions/${transaction._id}`,
+        transaction,
+        config
+      );
+      dispatch({
+        type: UPDATE_TRANSACTION,
+        payload: res.data
+      });
+    } catch (err) {
+      dispatch({
+        type: TRANSACTION_ERROR,
+        payload: err.response.msg
+      });
+    }
+  };
+
   // Clear Transactions
   const clearTransactions = () => {
     dispatch({ type: CLEAR_TRANSACTIONS });
@@ -80,7 +122,7 @@ const TransactionState = props => {
   };
 
   // Filter Transactions
-  const filterTransactions = text => {
+  const filterTransaction = text => {
     dispatch({ type: FILTER_TRANSACTIONS, payload: text });
   };
 
@@ -98,10 +140,12 @@ const TransactionState = props => {
         error: state.error,
         getTransactions,
         addTransaction,
+        deleteTransaction,
+        updateTransaction,
         clearTransactions,
         setCurrent,
         clearCurrent,
-        filterTransactions,
+        filterTransaction,
         clearFilter
       }}
     >

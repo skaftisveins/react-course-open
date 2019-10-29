@@ -131,7 +131,7 @@ const App = () => {
     <TransactionState>
       <Title>
         React Transaction App
-        <Span> (Version 2.8.4)</Span>
+        <Span> (Version 2.8.6)</Span>
       </Title>
 
       {/* <themeContext.Provider value={themeState}>

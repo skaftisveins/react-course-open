@@ -5,11 +5,12 @@ import TransactionFilter from '../transactions/TransactionFilter';
 
 const Home = () => {
   return (
-    <div className='grid-2'>
+    <div className="grid-2">
       <div>
         <TransactionForm />
       </div>
       <div>
+        <TransactionFilter />
         <Transactions />
       </div>
     </div>
