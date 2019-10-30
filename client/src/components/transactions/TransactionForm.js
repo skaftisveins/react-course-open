@@ -51,57 +51,57 @@ const TransactionForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2 className="text-primary">
+      <h2 className='text-primary'>
         {current ? 'Edit Transaction' : 'Add Transaction'}
       </h2>
       <input
-        type="text"
-        placeholder="Title"
-        name="title"
+        type='text'
+        placeholder='Title'
+        name='title'
         value={title}
         onChange={handleChange}
       />
       <input
-        type="text"
-        placeholder="description"
-        name="description"
+        type='text'
+        placeholder='description'
+        name='description'
         value={description}
         onChange={handleChange}
       />
       <input
-        type="text"
-        placeholder="cost"
-        name="cost"
+        type='text'
+        placeholder='cost'
+        name='cost'
         value={cost}
         onChange={handleChange}
       />
       <h5>Transaction Type</h5>
       <input
-        type="radio"
-        name="type"
-        value="expense"
+        type='radio'
+        name='type'
+        value='expense'
         checked={type === 'expense'}
         onChange={handleChange}
       />
       Expense{' '}
       <input
-        type="radio"
-        name="type"
-        value="income"
+        type='radio'
+        name='type'
+        value='income'
         checked={type === 'income'}
         onChange={handleChange}
       />
       Income{' '}
       <div>
         <input
-          type="submit"
+          type='submit'
           value={current ? 'Update Transaction' : 'Add Transaction'}
-          className="btn btn-primary btn-block"
+          className='btn btn-primary btn-block'
         />
       </div>
       {current && (
         <div>
-          <button className="btn btn-light btn-block" onClick={clearAll}>
+          <button className='btn btn-light btn-block' onClick={clearAll}>
             Clear
           </button>
         </div>

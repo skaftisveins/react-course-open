@@ -79,14 +79,23 @@ const Button = styled.button`
   }
 `;
 
+const StyledContainer = styled.div`
+  max-width: 1100px;
+  margin: auto;
+  overflow: hidden;
+  padding: 0 2rem;
+`;
+
 const App = () => {
   return (
     <TransactionState>
       <Title>
         React Transaction App
-        <Span> (Version 2.8.9)</Span>
+        <Span> (Version 2.9)</Span>
       </Title>
-      <Home />
+      <StyledContainer>
+        <Home />
+      </StyledContainer>
     </TransactionState>
   );
 };
